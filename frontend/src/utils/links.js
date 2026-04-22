@@ -1,4 +1,4 @@
-export const baseURL = 'http://localhost:3000/api';
+export const baseURL = 'https://gadget-fai.onrender.com/api';
 
 // User endpoints
 export const signuplink = `${baseURL}/user/signup`;
