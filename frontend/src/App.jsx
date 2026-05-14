@@ -4,6 +4,7 @@ import Signup from './auth/Signup.jsx';
 import Signin from './auth/Signin.jsx';
 import Footer from "./components/Footer.jsx";
 import Gadget from "./pages/Gadget.jsx";
+import Recommendations from "./pages/Recommendations.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/gadgets/:id" element={<Gadget />} />

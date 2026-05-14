@@ -6,8 +6,14 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "import:gadgets": "node src/scripts/importGadgetsFromCsv.js",
+    "import:gadgets:clear": "node src/scripts/importGadgetsFromCsv.js --clear",
     "seed": "node populateDB.js",
     "reset-db": "node resetDB.js",
+    "scrape": "python src/scrapdata.py",
+    "scrape:json": "python src/scrapdata.py --skip-db",
+    "scrape:api": "python src/scrapdata.py --use-scraping-api-fallback --use-product-api",
+    "scrape:api:json": "python src/scrapdata.py --skip-db --use-scraping-api-fallback --use-product-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,6 +24,7 @@
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "csv-parse": "^6.2.1",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "groq-sdk": "^0.37.0",

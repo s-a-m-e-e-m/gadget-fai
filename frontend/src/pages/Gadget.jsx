@@ -46,7 +46,7 @@ const Gadget = () => {
             <section className="min-h-screen bg-slate-950 px-4 py-16 text-slate-100 md:px-10">
                 <div className="mx-auto w-full max-w-5xl rounded-2xl border border-slate-700/60 bg-slate-900/60 p-8 text-center backdrop-blur-sm">
                     <h1 className="mb-3 text-3xl font-black tracking-tight text-cyan-300">Gadget not found</h1>
-                    <p className="mb-6 text-slate-300">This gadget could not be loaded or does not exist.</p>
+                    <p className="mb-6 text-slate-300">This gadget may have been removed or is not available.</p>
                     <Link
                         to="/"
                         className="inline-flex items-center justify-center rounded-lg bg-cyan-500 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-cyan-400"
@@ -60,41 +60,73 @@ const Gadget = () => {
 
     return (
         <section className="min-h-screen bg-slate-950 px-4 py-16 text-slate-100 md:px-10">
-            <div className="mx-auto w-full max-w-5xl rounded-2xl border border-slate-700/60 bg-slate-900/60 p-8 shadow-[0_20px_50px_-20px_rgba(14,165,233,0.35)] backdrop-blur-sm">
-                <p className="mb-3 inline-flex rounded-full border border-cyan-400/40 bg-cyan-500/10 px-3 py-1 text-sm font-semibold text-cyan-300">
-                    Gadget Details
-                </p>
-                <h1 className="text-4xl font-black tracking-tight text-white">{gadget.name}</h1>
-                <p className="mt-4 text-slate-300">{gadget.description || 'No description available.'}</p>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                    <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-300">
-                        ${Number(gadget.price || 0).toFixed(2)}
-                    </span>
-                    <span className="rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-sm font-semibold text-fuchsia-300">
-                        {gadget.category || 'General'}
-                    </span>
-                </div>
-
-                <h2 className="mt-8 mb-3 text-lg font-bold text-cyan-300">Specifications</h2>
-                <ul className="space-y-2 text-slate-200">
-                    {(gadget.specifications || []).length > 0 ? (
-                        (gadget.specifications || []).map((spec, index) => (
-                            <li key={index} className="rounded-lg bg-slate-800/70 px-3 py-2">
-                                {spec}
-                            </li>
-                        ))
-                    ) : (
-                        <li className="text-slate-400">No specifications listed.</li>
-                    )}
-                </ul>
-
+            <div className="mx-auto w-full max-w-5xl">
                 <Link
                     to="/"
-                    className="mt-8 inline-flex items-center justify-center rounded-lg border border-slate-600 bg-slate-900 px-5 py-2.5 font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300"
+                    className="mb-6 inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition"
                 >
-                    Back to Home
+                    ← Back
                 </Link>
+
+                <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-8 shadow-[0_20px_50px_-20px_rgba(14,165,233,0.35)] backdrop-blur-sm">
+                    <div className="mb-8">
+                        <p className="mb-3 inline-flex rounded-full border border-cyan-400/40 bg-cyan-500/10 px-3 py-1 text-sm font-semibold text-cyan-300">
+                            {gadget.category} Details
+                        </p>
+                        <h1 className="text-2xl font-bold text-white">{gadget.name}</h1>
+                        {gadget.brand && (
+                            <p className="mt-2 text-lg text-slate-400">Brand: <span className="text-slate-200 font-semibold">{gadget.brand}</span></p>
+                        )}
+                    </div>
+
+                    <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="rounded-lg border border-emerald-400/30 bg-emerald-500/10 p-4">
+                            <p className="text-sm text-slate-400">Price</p>
+                            <p className="text-3xl font-bold text-emerald-300">
+                                {gadget.priceCurrency === 'INR' ? '₹' : '$'}{Number(gadget.price || 0).toLocaleString('en-IN', {maximumFractionDigits: 2})}
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            {gadget.normalizedRating && (
+                                <div className="rounded-lg border border-yellow-400/30 bg-yellow-500/10 p-4">
+                                    <p className="text-sm text-slate-400">Rating</p>
+                                    <div className="flex items-center gap-2">
+                                        <p className="text-3xl font-bold text-yellow-300">{gadget.normalizedRating.toFixed(2)}</p>
+                                        <span className="text-2xl">⭐</span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {gadget.reviewsCount > 0 && (
+                                <div className="rounded-lg border border-blue-400/30 bg-blue-500/10 p-4">
+                                    <p className="text-sm text-slate-400">Reviews</p>
+                                    <p className="text-3xl font-bold text-blue-300">{gadget.reviewsCount.toLocaleString()}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="mb-8">
+                        <p className="mb-4 text-slate-300">{gadget.description || 'No description available.'}</p>
+                    </div>
+
+                    <div className="mb-8">
+                        <h2 className="mb-4 text-2xl font-bold text-cyan-300">Specifications</h2>
+                        {(gadget.specifications || []).length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {gadget.specifications.map((spec, index) => (
+                                    <div key={index} className="rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-3">
+                                        <p className="text-slate-200">{spec}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-slate-400">No specifications listed.</p>
+                        )}
+                    </div>
+
+                </div>
             </div>
         </section>
     )

@@ -18,19 +18,18 @@ const Home = () =>  {
                     <p className="max-w-2xl text-base text-slate-300 sm:text-lg">
                         Browse modern devices, compare specs quickly, and jump into your account to manage your favorites.
                     </p>
-
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-3 pt-2">
                         <Link
-                            to="/signin"
-                            className="rounded-lg bg-cyan-500 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-cyan-400"
+                            to="/recommendations"
+                            className="rounded-lg bg-cyan-500 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400"
                         >
-                            Sign In
+                            View Recommendations
                         </Link>
                         <Link
-                            to="/signup"
-                            className="rounded-lg border border-slate-600 bg-slate-900 px-5 py-2.5 font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300"
+                            to="/"
+                            className="rounded-lg border border-slate-700 bg-slate-900 px-5 py-3 font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300"
                         >
-                            Sign Up
+                            Browse Catalog
                         </Link>
                     </div>
                 </div>

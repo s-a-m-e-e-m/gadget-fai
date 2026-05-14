@@ -22,6 +22,15 @@ const Navbar = () => {
                 GadgifAI
             </Link>
 
+            <div className="hidden md:flex items-center gap-2">
+                <Link
+                    to="/recommendations"
+                    className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300"
+                >
+                    Recommendations
+                </Link>
+            </div>
+
             {user ? (
                 <div className="flex items-center gap-3">
                     <span className="hidden rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-300 sm:inline-flex">
